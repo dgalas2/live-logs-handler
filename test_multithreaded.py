@@ -2,7 +2,7 @@
 Test script for multi-threaded logging with stdout, stderr, and logging module.
 
 This script spawns multiple threads that simultaneously write logs using:
-- print() statements (stdout)
+- #print() statements (stdout)
 - sys.stderr.write() (stderr)
 - logging module (logging.info, logging.error, etc.)
 
@@ -26,11 +26,11 @@ def worker_task(worker_id, iterations=5):
     """
     for i in range(iterations):
         # Print to stdout
-        print(f"[Worker {worker_id}] Print message #{i+1}")
+        #print(f"[Worker {worker_id}] Print message #{i+1}")
         
         # Write to stderr
-        sys.stderr.write(f"[Worker {worker_id}] Stderr message #{i+1}\n")
-        sys.stderr.flush()
+        # sys.stderr.write(f"[Worker {worker_id}] Stderr message #{i+1}\n")
+        # sys.stderr.flush()
         
         # Use logging module
         logging.info(f"Worker {worker_id} - Info log #{i+1}")
@@ -47,22 +47,22 @@ def worker_task(worker_id, iterations=5):
 
 def test_basic_logging():
     """Test basic logging functionality."""
-    print("\n=== Test 1: Basic Logging ===")
+    #print("\n=== Test 1: Basic Logging ===")
     
     logger = start_logging("test_basic.log", capture_print=True)
     
-    print("Testing basic print statement")
+    #print("Testing basic print statement")
     logging.info("Testing basic logging.info")
     logging.error("Testing basic logging.error")
-    sys.stderr.write("Testing stderr write\n")
+    # sys.stderr.write("Testing stderr write\n")
     
     logger.stop()
-    print("✓ Basic logging test completed\n")
+    #print("✓ Basic logging test completed\n")
 
 
 def test_multithreaded_logging():
     """Test multi-threaded logging with concurrent workers."""
-    print("\n=== Test 2: Multi-threaded Logging ===")
+    #print("\n=== Test 2: Multi-threaded Logging ===")
     
     # Start logger
     logger = start_logging("test_multithreaded.log", capture_print=True)
@@ -72,7 +72,7 @@ def test_multithreaded_logging():
     iterations_per_thread = 10
     threads = []
     
-    print(f"Spawning {num_threads} worker threads...")
+    #print(f"Spawning {num_threads} worker threads...")
     
     for i in range(num_threads):
         thread = threading.Thread(
@@ -89,7 +89,7 @@ def test_multithreaded_logging():
     
     # Stop logger
     logger.stop()
-    print(f"✓ Multi-threaded test completed: {num_threads} threads × {iterations_per_thread} iterations\n")
+    #print(f"✓ Multi-threaded test completed: {num_threads} threads × {iterations_per_thread} iterations\n")
 
     
     try:
@@ -100,12 +100,12 @@ def test_multithreaded_logging():
         logging.exception("Caught index error")
     
     logger.stop()
-    print("✓ Exception logging test completed\n")
+    #print("✓ Exception logging test completed\n")
 
 
 def test_high_volume_logging():
     """Test high-volume logging from multiple threads."""
-    print("\n=== Test 5: High Volume Logging ===")
+    #print("\n=== Test 5: High Volume Logging ===")
     
     logger = start_logging("test_high_volume.log", buffer_size=5000, capture_print=True)
     
@@ -113,7 +113,7 @@ def test_high_volume_logging():
     iterations = 50
     threads = []
     
-    print(f"Spawning {num_threads} threads with {iterations} iterations each...")
+    #print(f"Spawning {num_threads} threads with {iterations} iterations each...")
     
     for i in range(num_threads):
         thread = threading.Thread(
@@ -128,14 +128,14 @@ def test_high_volume_logging():
         thread.join()
     
     logger.stop()
-    print(f"✓ High volume test completed: {num_threads * iterations * 4} log entries\n")
+    #print(f"✓ High volume test completed: {num_threads * iterations * 4} log entries\n")
 
 
 def main():
     """Run all tests."""
-    print("=" * 60)
-    print("Multi-threaded Logging Test Suite")
-    print("=" * 60)
+    #print("=" * 60)
+    #print("Multi-threaded Logging Test Suite")
+    #print("=" * 60)
     
     # Run all tests
     test_basic_logging()
@@ -144,9 +144,9 @@ def main():
     # test_exception_logging()
     test_high_volume_logging()
     
-    print("=" * 60)
-    print("All tests completed successfully! ✓")
-    print("=" * 60)
+    #print("=" * 60)
+    #print("All tests completed successfully! ✓")
+    #print("=" * 60)
 
 
 if __name__ == "__main__":

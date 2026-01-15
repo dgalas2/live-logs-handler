@@ -141,6 +141,12 @@ class ThreadSafeStructuredLogger:
     
     def _setup_logging_handler(self):
         """Setup Python logging handler to capture logging.* calls."""
+
+        # Setup basic logging to stdout first
+        logging.basicConfig(
+            level=logging.INFO,
+        )
+        
         class StructuredLogHandler(logging.Handler):
             def __init__(self, logger_instance):
                 super().__init__()
